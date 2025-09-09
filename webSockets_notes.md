@@ -44,6 +44,7 @@ socket.emit("chat message", "Hello!");
 socket.on("chat message", (msg) => {
   console.log("Got:", msg);
 });
+```
 
 👉 Use when user sends input to server.
 
