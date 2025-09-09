@@ -8,7 +8,7 @@ const handleSockets = require("./sockets"); // Our custom chat logic
 function startServer() {
   const app = express(); // Create Express app
   const server = http.createServer(app); // Create HTTP server
-  const io = new Server(server); // Attach Socket.IO to server
+  const io = new Server(server); // Attach Socket.IO to server //? here we are integrating both express-server and socket.io-chat-server
 
   app.use(express.static("public")); // Serve HTML/CSS/JS from public folder
 
