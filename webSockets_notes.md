@@ -1,3 +1,6 @@
+Yes, I understand. I will provide the content in a single Markdown block so you only have to copy it once.
+
+````md
 # ⚡ Socket.IO Cheat Sheet
 
 Your quick reference for real-time communication.
@@ -9,6 +12,8 @@ Your quick reference for real-time communication.
 - **`socket`** → one specific user’s connection.  
 - Both **client** and **server** have their own `socket` object.  
 
+**Note:** In `io.on("connection", (socket) => { ... })`, Socket.IO automatically gives you the `socket` object representing the **newly connected user**. You can use this `socket` to talk to that user specifically.
+
 ---
 
 ## ⚡ Common Methods
@@ -16,9 +21,9 @@ Your quick reference for real-time communication.
 ### 🖥️ On the Server
 | Method | Use |
 |--------|-----|
-| `io.on("connection", (socket) => { ... })` | Runs when a user connects |
+| `io.on("connection", (socket) => { ... })` | Runs when a user connects. Gives a `socket` object for that user |
 | `socket.on(event, callback)` | Listen for a message from this user |
-| `socket.emit(event, data)` | Send a message to this user only |
+| `socket.emit(event, data)` | Send a message to **this user only** |
 | `io.emit(event, data)` | Send a message to **everyone** |
 | `socket.broadcast.emit(event, data)` | Send to **everyone except the sender** |
 
@@ -42,3 +47,98 @@ socket.emit("chat message", "Hello!");
 socket.on("chat message", (msg) => {
   console.log("Got:", msg);
 });
+````
+
+👉 Use when user sends input to server.
+
+### Case B: Server → Client (single user)
+
+```js
+// Server
+socket.emit("chat message", "Welcome!");
+
+// Client
+socket.on("chat message", (msg) => {
+  console.log("Got:", msg);
+});
+```
+
+👉 Use when server replies just to that one user.
+
+### Case C: Server → All Clients
+
+```js
+// Server
+io.emit("chat message", "A new user joined!");
+
+// Client
+socket.on("chat message", (msg) => {
+  console.log("Got:", msg);
+});
+```
+
+👉 Use when everyone should see the message.
+
+### Case D: Server → Everyone Except Sender
+
+```js
+// Server
+socket.broadcast.emit("chat message", "A new user joined!");
+
+// Client
+socket.on("chat message", (msg) => {
+  console.log("Got:", msg);
+});
+```
+
+👉 Use when the server tells everyone except the sender.
+
+-----
+
+## 🔌 Connect & Disconnect
+
+### Detect new user
+
+```js
+io.on("connection", (socket) => {
+  console.log("User connected:", socket.id);
+});
+```
+
+Happens once when a user opens the page.
+`socket` is the unique connection object for that user.
+
+### Detect user leaving
+
+```js
+socket.on("disconnect", () => {
+  console.log("User disconnected:", socket.id);
+});
+```
+
+Happens when the user closes the tab, refreshes, or loses internet.
+
+-----
+
+## 🎯 Memory Tricks
+
+  * `Client socket.emit` → talks TO server
+  * `Server socket.emit` → talks TO that one client
+  * `io.emit` → talks TO all clients
+  * `socket.broadcast.emit` → talks TO all EXCEPT the sender
+
+-----
+
+## 💡 Notes
+
+  * Both server and client have a `socket` object; context matters.
+  * Use `socket.emit` to talk to a specific connection.
+  * Use `io.emit` for broadcasting to everyone.
+  * Use `socket.broadcast.emit` to broadcast to all except the sender.
+  * Listening for events is always done with `socket.on(event, callback)`.
+  * The `io.on("connection")` automatically gives you `socket` representing the newly connected user.
+
+<!-- end list -->
+
+```
+```
