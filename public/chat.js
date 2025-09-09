@@ -1,3 +1,11 @@
+//! this is the client/user side socket code
+//! this is the client/user side socket code
+//! this is the client/user side socket code
+//! this is the client/user side socket code
+//? so to send message from the user to the server, we use socket.emit("event-type", "message")
+//? so to listen to the message to the user from the server, we use socket.on("event-type", "call back function with that message")
+//? here, the socket refers to the server's socket and not the client's socket
+
 // Connect to the server using Socket.IO
 const socket = io();
 
@@ -12,6 +20,7 @@ const btn = document.getElementById("sendBtn");
 
 //! this one listens to the messages from the server to the user
 //? "chat message" is the event type
+//? "msg" is the message coming from the server
 // Listen for messages coming from the server
 socket.on("chat message", (msg) => {
   // Make a new paragraph element to show the message
@@ -45,7 +54,8 @@ btn.addEventListener("click", () => {
   // If input is empty, do nothing
   if (input.value.trim() === "") return;
 
-  // Send the typed message to the server
+  //? Send the typed message from the user to the server
+  //? "chat message" is the event type
   socket.emit("chat message", input.value);
 
   // Clear the input box so user can type new message

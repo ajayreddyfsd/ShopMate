@@ -1,7 +1,7 @@
 // Load required modules
 const express = require("express"); // Makes web server development easy
 const http = require("http"); // Needed to attach Socket.IO
-const { Server } = require("socket.io"); // Real-time chat server
+const { Server } = require("socket.io"); // Real-time chat server from the socket.io
 const handleSockets = require("./sockets"); // Our custom chat logic
 
 // Function to start the server
