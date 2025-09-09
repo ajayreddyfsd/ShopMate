@@ -1,6 +1,3 @@
-Yes, I understand. I will provide the content in a single Markdown block so you only have to copy it once.
-
-````md
 # ⚡ Socket.IO Cheat Sheet
 
 Your quick reference for real-time communication.
@@ -8,9 +5,9 @@ Your quick reference for real-time communication.
 ---
 
 ## 🔑 Who is who?
-- **`io`** → the whole server (all users, the “chat room”).  
-- **`socket`** → one specific user’s connection.  
-- Both **client** and **server** have their own `socket` object.  
+- **`io`** → the whole server (all users, the “chat room”).
+- **`socket`** → one specific user’s connection.
+- Both **client** and **server** have their own `socket` object.
 
 **Note:** In `io.on("connection", (socket) => { ... })`, Socket.IO automatically gives you the `socket` object representing the **newly connected user**. You can use this `socket` to talk to that user specifically.
 
@@ -47,7 +44,6 @@ socket.emit("chat message", "Hello!");
 socket.on("chat message", (msg) => {
   console.log("Got:", msg);
 });
-````
 
 👉 Use when user sends input to server.
 
