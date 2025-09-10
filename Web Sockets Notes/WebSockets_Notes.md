@@ -10,7 +10,7 @@ Quick reference for real-time communication using Socket.io
 - **`socket`** → that one specific user’s connection.
 - Both **client** and **server** have their own `socket` object and their own `socket` code.
 
-**Note:** In `io.on("connection", (socket) => { ... })`, Socket.IO automatically gives you the `socket` object representing the **newly connected user** as soon as a new user is connected. You can use this `socket` to talk to that user specifically.
+**Note:** In the server-side-socket-code`io.on("connection", (socket) => { ... })`, Socket.IO automatically gives you the `socket` object representing the **newly connected user** as soon as a new user is connected. You can use this `socket` to talk to that user specifically.
 
 ---
 
